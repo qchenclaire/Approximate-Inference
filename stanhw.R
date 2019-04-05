@@ -30,11 +30,11 @@ write("// Stan model
         vector[K] obs[D];
         
         // adjust priors according to observation of ys
-        //mu[1] ~ normal(-10, 1);
-        //mu[2] ~ normal(5, 1);
-        //mu[3] ~ normal(10, 1);
+        mu[1] ~ normal(-10, 1);
+        mu[2] ~ normal(5, 1);
+        mu[3] ~ normal(10, 1);
         for(k in 1:K){
-          mu[k] ~ normal(0, 10);
+          //mu[k] ~ normal(0, 10);
           sigma[k] ~ inv_gamma(1,1);
         }
 
@@ -63,8 +63,8 @@ stanc("stan_model.stan")
 stan_model <- "stan_model.stan"
 
 ## fit
-fit <- stan(file = stan_model, data = stan_data, warmup = 500, iter = 1000, chains = 8, cores = 4, thin = 1)
-
+#fit <- stan(file = stan_model, data = stan_data, warmup = 500, iter = 1000, chains = 1, cores = 4, thin = 1)
+fit <- stan(file = stan_model, data = stan_data, warmup = 500, iter = 1000, chains = 2, cores = 4, thin = 1)
 ## check it out
 fit
 
@@ -85,10 +85,6 @@ fit2
 posterior2 <- extract(fit2)
 hist(posterior2$mu)
 
-## some other diagnostics
-#traceplot(fit2)
-stan_dens(fit2)
-#stan_hist(fit2)
 print(fit)
 print(fit2)
 #library(shinystan)

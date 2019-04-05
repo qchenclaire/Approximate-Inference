@@ -17,11 +17,11 @@
         vector[K] obs[D];
         
         // adjust priors according to observation of ys
-        //mu[1] ~ normal(-10, 1);
-        //mu[2] ~ normal(5, 1);
-        //mu[3] ~ normal(10, 1);
+        mu[1] ~ normal(-10, 1);
+        mu[2] ~ normal(5, 1);
+        mu[3] ~ normal(10, 1);
         for(k in 1:K){
-          mu[k] ~ normal(0, 10);
+          //mu[k] ~ normal(0, 10);
           sigma[k] ~ inv_gamma(1,1);
         }
 
